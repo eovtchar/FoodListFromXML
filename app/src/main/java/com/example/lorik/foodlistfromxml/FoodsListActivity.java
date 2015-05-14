@@ -33,15 +33,16 @@ public class FoodsListActivity extends ListActivity {
                 String name1 = foodsParser.getName();
                 if (eventType == XmlPullParser.START_TAG && name1.equals("name")) {
 
+                    id = foodsParser.getAttributeValue(null,"food_id");
                     foodsParser.next();
                     name = foodsParser.getText();
-                    id = foodsParser.getAttributeValue(null,"food_id");
 
                 }
                 if (eventType == XmlPullParser.START_TAG && name1.equals("price")) {
                     foodsParser.next();
                     String price = foodsParser.getText();
                     foodsList.add(new Food(id, name, price));
+                    Log.v(TAG,"id" + id + name + price);
                 }
                 eventType = foodsParser.next();
             }
