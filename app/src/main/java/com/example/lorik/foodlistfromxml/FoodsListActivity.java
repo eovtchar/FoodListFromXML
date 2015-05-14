@@ -24,33 +24,9 @@ public class FoodsListActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
             XmlPullParser foodsParser = getResources().getXml(R.xml.foods);
-            int eventType = foodsParser.getEventType();
-            String name = "";
-            String id = "";
-            while (eventType != XmlPullParser.END_DOCUMENT) {
-                String name1 = foodsParser.getName();
-                if (eventType == XmlPullParser.START_TAG && name1.equals("name")) {
-
-                    id = foodsParser.getAttributeValue(null,"food_id");
-                    foodsParser.next();
-                    name = foodsParser.getText();
-
-                }
-                if (eventType == XmlPullParser.START_TAG && name1.equals("price")) {
-                    foodsParser.next();
-                    String price = foodsParser.getText();
-                    foodsList.add(new Food(id, name, price));
-                    Log.v(TAG,"id" + id + name + price);
-                }
-                eventType = foodsParser.next();
-            }
-        } catch (Throwable t) {
-            Log.v(TAG, "Error XML-file loading: " + t.toString());
-            Toast.makeText(this, "Error XML-file loading: " + t.toString(), Toast.LENGTH_LONG)
-                    .show();
-        }
+        HandleFoodXML handleFoodXML = new HandleFoodXML();
+        foodsList = handleFoodXML.getFoodList(foodsParser);
 
         setListAdapter(new StateAdapter(foodsList.toArray(new Food[foodsList.size()])));
         final FoodsListActivity activity = this;
@@ -73,6 +49,7 @@ public class FoodsListActivity extends ListActivity {
         };
         getListView().setOnItemClickListener(itemListener);
     }
+
 
     private Food getModel(int position) {
         return (((StateAdapter) getListAdapter()).getItem(position));

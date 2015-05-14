@@ -1,11 +1,28 @@
 package com.example.lorik.foodlistfromxml;
 
-/**
- * Created by Lorik on 13.05.2015.
- */
 public class Food {
     private String name; // название
     private String price;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    private String description;
+
+    public String getCalories() {
+        return calories;
+    }
+
+    public void setCalories(String calories) {
+        this.calories = calories;
+    }
+
+    private String calories;
 
     public String getId() {
         return id;
@@ -39,7 +56,11 @@ public class Food {
         this.id=id;
         this.name=name;
         this.price=price;
+
     }
+    public Food(){
+
+            }
 
 
 
