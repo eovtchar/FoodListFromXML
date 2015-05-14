@@ -11,6 +11,7 @@ import org.xmlpull.v1.XmlPullParser;
 
 public class FoodInfo extends Activity {
     private static final String TAG = "MainActivity";
+    
 
 
     @Override
@@ -34,7 +35,7 @@ public class FoodInfo extends Activity {
                 if (eventType == XmlPullParser.START_TAG && name1.equals("name")) {
 
                     id = foodsParser.getAttributeValue(null,"food_id");
-                    
+
                     foodsParser.next();
                     name = foodsParser.getText();
                     foodInfoName.setText(name);
